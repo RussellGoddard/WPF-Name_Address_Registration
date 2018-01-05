@@ -1,0 +1,8 @@
+Default saving/importing is pointed to MyDocuments/SavedAddresses
+
+But you can select the file path you want.
+
+Also included is bFormatter serialization writing/reading (.stf) and xml serialization writing/reading (.xtf), 
+you just need to go into MainWindow.xaml.cs, 
+find the function private void ButtonClick and scroll down to the write and load sections 
+and then uncomment/comment out the ones you want

@@ -1,0 +1,60 @@
+﻿<Window x:Class="RGoddard_Project_4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RGoddard_Project_4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="577" Width="609" MinHeight="577" MaxHeight="800" MinWidth="609" MaxWidth="1000">
+    <Grid KeyDown="KeyPressed" Loaded="OnLoad">
+        <Label x:Name="label_SavedAddr" Content="Saved Addresses:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="combo_SavedAddr" HorizontalAlignment="Stretch" Margin="112,10,101.667,0" VerticalAlignment="Top" Width="Auto" IsSynchronizedWithCurrentItem="True" SelectionChanged="recallAddr"/>
+        <Label x:Name="label_IdNum" Content="Selected ID:" HorizontalAlignment="Left" Margin="11,32,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBlock x:Name="text_IdNum" HorizontalAlignment="Stretch" Margin="112,37,103,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="23"/>
+        <Label x:Name="label_FirstName" Content="*First Name:" HorizontalAlignment="Left" Margin="12,57,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_LastName" Content="*Last Name:" HorizontalAlignment="Left" Margin="12,88,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_Address" Content="Address:" HorizontalAlignment="Left" Margin="12,119,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_Address2" Content="Line 2:" HorizontalAlignment="Left" Margin="12,146,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_City" Content="City:" HorizontalAlignment="Left" Margin="12,172,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_State" Content="State:" HorizontalAlignment="Left" Margin="12,198,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_ZIP" Content="ZIP:" HorizontalAlignment="Left" Margin="12,224,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_PhoneNumber" Content="Phone Number:" HorizontalAlignment="Left" Margin="12,250,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_Search" Content="Search By Name:" HorizontalAlignment="Left" Margin="13,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="text_FirstName" HorizontalAlignment="Stretch" Height="23" Margin="112,60,101,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" LostFocus="FirstNameBlur" GotFocus="FirstNameFocus" Background="White" />
+        <TextBox x:Name="text_LastName" HorizontalAlignment="Stretch" Height="23" Margin="112,91,101,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" GotFocus="LastNameFocus" LostFocus="LastNameBlur" />
+        <TextBox x:Name="text_Addr" HorizontalAlignment="Stretch" Height="23" Margin="112,123,101,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" GotFocus="AddressFocus" LostFocus="AddressBlur"/>
+        <TextBox x:Name="text_Addr2" HorizontalAlignment="Stretch" Height="23" Margin="112,147,101,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" LostFocus="Address2Blur" GotFocus="Address2Focus"/>
+        <TextBox x:Name="text_City" HorizontalAlignment="Stretch" Height="23" Margin="112,175,101,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>
+        <ComboBox x:Name="text_State" HorizontalAlignment="Stretch" Margin="112,202,102,0" VerticalAlignment="Top" Width="Auto"/>
+        <TextBox x:Name="text_ZIP" HorizontalAlignment="Stretch" Height="23" Margin="112,227,101,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" GotFocus="ZipFocus" LostFocus="ZipBlur"/>
+        <TextBox x:Name="text_PhoneNumber" HorizontalAlignment="Stretch" Height="23" Margin="112,255,101,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" GotFocus="PhoneFocus" LostFocus="PhoneBlur"/>
+        <TextBox x:Name="text_Search" HorizontalAlignment="Stretch" Height="23" Margin="112,364,100,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Text="{Binding SearchText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" GotFocus="SearchFocus" LostFocus="SearchBlur" />
+        <!--<TextBlock x:Name="text_error_old" HorizontalAlignment="Stretch" Margin="111,293,102.667,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>-->
+        <Button x:Name="button_Reset" Content="Reset Fields" HorizontalAlignment="Right" Margin="0,63,20,0" VerticalAlignment="Top" Width="77" Click="buttonClick"/>
+        <Button x:Name="button_SaveAddr" Content="Store Addr" HorizontalAlignment="Right" Margin="0,177,20,0" VerticalAlignment="Top" Width="77" Click="buttonClick"/>
+        <Button x:Name="button_DeleteAddr" Content="Delete Addr" HorizontalAlignment="Right" Margin="0,204,20,0" VerticalAlignment="Top" Width="77" Click="buttonClick"/>
+        <Button x:Name="button_SaveToText" Content="Save All" HorizontalAlignment="Right" Margin="0,229,20,0" VerticalAlignment="Top" Width="77" Click="buttonClick"/>
+        <Button x:Name="button_LoadFromText" Content="Import" HorizontalAlignment="Right" Margin="0,256,20,0" VerticalAlignment="Top" Width="77" Click="buttonClick"/>
+        <DataGrid x:Name="grid_output" HorizontalAlignment="Stretch" Height="Auto" Margin="7,392,10,7" VerticalAlignment="Stretch" Width="Auto" IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="grid_column_idNum" Header="ID" Binding="{Binding Path=IdNum}" />
+                <DataGridTextColumn x:Name="grid_column_firstName" Header="First Name" Binding="{Binding Path=name.FirstName}" />
+                <DataGridTextColumn x:Name="grid_column_lastName" Header="Last Name" Binding="{Binding Path=name.LastName}" />
+                <DataGridTextColumn x:Name="grid_column_address" Header="Address" Binding="{Binding address.AddressFull}" />
+                <DataGridTextColumn x:Name="grid_column_city" Header="City" Binding="{Binding Path=address.City}" />
+                <DataGridTextColumn x:Name="grid_column_state" Header="State" Binding="{Binding Path=address.State}" />
+                <DataGridTextColumn x:Name="grid_column_zip" Header="ZIP" Binding="{Binding Path=address.ZipFormatted}" />
+                <DataGridTextColumn x:Name="grid_column_phoneNumber" Header="Phone Number" Binding="{Binding Path=PhoneNumberFormatted}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <ListBox x:Name="text_Error" HorizontalAlignment="Stretch" Height="78" Margin="113,283,102,0" VerticalAlignment="Top" Width="Auto" BorderThickness="0">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Height" Value="18" />
+                    <Setter Property="IsTabStop" Value="False"/>
+                    <Setter Property="Focusable" Value="False"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
+</Window>
