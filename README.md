@@ -4,4 +4,4 @@ This app requires a user to input their first and last name and then assigns the
 For more information on how the program works, check the repository wiki or you can browse the code yourself.
 
 
-[Download link](Executable/NameAdd_Registration.exe)
+[Download link](https://github.com/RussellGoddard/WPF-Name_Address_Registration/blob/master/Executable/NameAdd_Registration.exe?raw=true)
